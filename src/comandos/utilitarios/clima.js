@@ -38,18 +38,18 @@ module.exports = {
 
   //* Comando
   async executar(iCmd, opcoes) {
-    if (!process.env.openweatherAPI) throw new Error("Key do Open Weather não definida");
+    if (!process.env.OPEN_WEATHER_API_KEY) throw new Error("Key do Open Weather não definida");
 
     client.log("info", `Procurando clima de "${opcoes.lugar}"`);
 
     const pingApi = new Date();
     const clima = await fetch(
       "http://api.openweathermap.org/data/2.5/weather?"
-      + `q=${encodeURI(opcoes.lugar)}`            // Cidade e pais para procurar
-      + "&lang=pt"                                // Linguagem (pt_br não traduz os nomes das cidades)
-      + "&units=metric"                           // Unidades
-      + "&mode=json"                              // modo
-      + `&appid=${process.env.openweatherAPI}`    // Key da api
+      + `q=${encodeURI(opcoes.lugar)}`                // Cidade e pais para procurar
+      + "&lang=pt"                                    // pt_br não traduz os nomes das cidades
+      + "&units=metric"
+      + "&mode=json"
+      + `&appid=${process.env.OPEN_WEATHER_API_KEY}`  // Key da api
     ).then(resultado => resultado.json());
 
     client.log(
@@ -103,7 +103,7 @@ module.exports = {
 
   //* Comando como mensagem
   async executarMsg(msg, args) {
-    if (!process.env.openweatherAPI) throw new Error("Key do Open Weather não definida");
+    if (!process.env.OPEN_WEATHER_API_KEY) throw new Error("Key do Open Weather não definida");
     if (!args[0]) {
       return client.responder(
         msg,
@@ -119,11 +119,11 @@ module.exports = {
     const pingApi = new Date();
     const clima = await fetch(
       "http://api.openweathermap.org/data/2.5/weather?"
-      + `q=${encodeURI(args.join(" "))}`          // String para procurar
-      + "&lang=pt"                                // Linguagem (pt_br não traduz os nomes das cidades)
-      + "&units=metric"                           // Unidades
-      + "&mode=json"                              // modo
-      + `&appid=${process.env.openweatherAPI}`    // Key da api
+      + `q=${encodeURI(args.join(" "))}`              // String para procurar
+      + "&lang=pt"                                    // pt_br não traduz os nomes das cidades
+      + "&units=metric"
+      + "&mode=json"
+      + `&appid=${process.env.OPEN_WEATHER_API_KEY}`  // Key da api
     ).then(resultado => resultado.json());
 
     client.log(

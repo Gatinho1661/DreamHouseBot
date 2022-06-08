@@ -136,6 +136,32 @@ exports.proximoAniversario = (nascimentoData) => {
 exports.capitalizar = (texto) => texto.charAt(0).toUpperCase() + texto.slice(1);
 
 /**
+ * Formata um ID para mencionar o usuário
+ * @param {String|String[]} ids 
+ * @returns 
+ */
+exports.criarMencoes = (ids) => {
+  if (typeof ids === "string") return `<@${ids}>`;
+  if (!(ids instanceof Array)) throw new Error("Parametro \"ids\" não é uma String nem Array");
+
+  let mencoes = [];
+  for (const mencao of ids) {
+    mencoes.push(`<@${mencao}>`);
+  }
+  return mencoes;
+};
+
+/**
+ * Cria timestamps para o discord
+ * @param {Date} data Data para o timestamp
+ * @param {"f"|"F"|"R"|"d"|"D"|"t"|"T"} formato 
+ * @returns 
+ */
+exports.criarTimestamp = (data, formato) => {
+  return `<t:${Math.round(data.getTime() / 1000)}:${formato}>`;
+};
+
+/**
  * Cria uma barra de progresso
  * @param {Number} porcentagem Porcentagem para o progresso
  * @param {Object} opcoesBarra

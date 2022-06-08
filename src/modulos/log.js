@@ -3,7 +3,7 @@ const chalk = require("chalk");
 
 /**
  * 
- * @param {"bot"|"critico"|"erro"|"aviso"|"comando"|"meme"|"servidor"|"info"|"api"|"musica"|"verbose"|"log"|"custom"} tipo O tipo de log
+ * @param {"bot"|"mongodb"|"critico"|"erro"|"aviso"|"comando"|"meme"|"servidor"|"info"|"api"|"musica"|"verbose"|"log"|"custom"} tipo O tipo de log
  * @param {string} msg Mensagem para logar
  * @param {"critico"|"erro"|"aviso"} subtipo 
  * @param {boolean} semTempo se deve logar com tempo ou sem
@@ -12,7 +12,7 @@ const chalk = require("chalk");
 module.exports = (tipo, msg, subtipo, semTempo) => {
   const tempo = new Date();
   const logTempo = semTempo ? "" : chalk.keyword("dimgray")`[${tempo.toLocaleTimeString()}.${String(tempo.getMilliseconds()).padStart(3, "0")}] `;
-  if (!client.config.get("log", tipo !== null ? tipo : "normal")) return;
+  //if (!client.config.get("log", tipo !== null ? tipo : "normal")) return;
 
   const subTipo = (subtipo) => {
     switch (subtipo) {
@@ -34,6 +34,10 @@ module.exports = (tipo, msg, subtipo, semTempo) => {
     // Tudo relacionado ao bot
     case "bot":
       return console.log(chalk`${logTempo}{bgKeyword('white').black BOT}${subTipo(subtipo)} {keyword('white') ${msg}}`);
+
+    // Tudo relacionado ao bot
+    case "mongodb":
+      return console.log(chalk`${logTempo}{bgHex("#4db33d").black MONGODB}${subTipo(subtipo)} {hex("#4db33d") ${msg}}`);
 
     // Erros não pegos
     case "critico":

@@ -1,10 +1,19 @@
+process.stdout.write(
+  String.fromCharCode(27) + "]0;DreamHouse Bot" + String.fromCharCode(7)
+);
+
+console.log("Iniciando DreamHouse Bot...");
+
+require("dotenv").config();
+require("./utilidades/checarVariaveis.js")();
+
 const Discord = require("discord.js");
 const { DisTube } = require("distube");
 const { SpotifyPlugin } = require("@distube/spotify");
 const { SoundCloudPlugin } = require("@distube/soundcloud");
 const { YtDlpPlugin } = require("@distube/yt-dlp");
+const mongoose = require("mongoose");
 const Enmap = require("enmap");
-require("dotenv").config();
 
 global.client = new Discord.Client({
   // define client como um objeto global
@@ -58,6 +67,12 @@ client.distube = new DisTube(client, {
   ],
 });
 
+client.defs = require("./recursos/defs.json");
+client.log = require("./modulos/log.js");
+client.responder = require("./modulos/responder.js");
+client.dir = __dirname;
+client.prefixo = process.env.prefixo;
+
 client.comandos = new Discord.Collection();
 client.snipes = new Discord.Collection();
 client.editSnipes = new Discord.Collection();
@@ -71,22 +86,23 @@ client.usuarios = new Enmap("usuarios");
 client.relacionamentos = new Enmap("relacionamentos");
 client.memes = new Enmap("memes");
 client.autoCargos = new Enmap("autocargos");
-
-client.defs = require("./recursos/defs.json");
-client.log = require("./modulos/log.js");
-client.responder = require("./modulos/responder.js");
-client.dir = __dirname;
-client.prefixo = process.env.prefixo;
-
-// Eventos
 client.nfs = new Enmap("nfs");
 
 process.on("uncaughtException", (erro) => {
   client.log("critico", `Unhandled error: ${erro.stack}`);
 });
 
+require("./modulos/esquemas")();
 require("./modulos/eventos")();
 require("./modulos/comandos").carregar();
 
-//* Fazer login
-client.login(process.env.TOKEN);
+//* Conectar ao banco de dados e fazer login
+mongoose.connect(process.env.MONGODB_URI, { keepAlive: true, dbName: "DreamHouseDB" })
+  .then(() => {
+    client.log("bot", "Fazendo login...");
+    client.login(process.env.TOKEN);
+  })
+  .catch((erro) => {
+    client.log("mongodb", `Não foi possível conectar ao banco de dados\n${erro.stack}`, "critico");
+    process.exitCode = 1;
+  });

@@ -4,7 +4,7 @@
   "description": "Bot oficial da DreamHouse",
   "main": "src/bot.js",
   "scripts": {
-    "start": "title DreamHouse && node src/bot.js",
+    "start": "node src/bot.js",
     "test": "node testar.js"
   },
   "repository": "github:Gatinho1661/DreamHouseBot",
@@ -28,6 +28,7 @@
     "enmap": "^5.9.0",
     "fast-glob": "^3.2.11",
     "long-timeout": "^0.1.1",
+    "mongoose": "^6.3.3",
     "node-cron": "^3.0.0",
     "sodium": "^3.0.2"
   },

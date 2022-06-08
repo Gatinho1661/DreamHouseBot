@@ -1,6 +1,9 @@
 name: Checar codigo
 on:
   push:
+    branches:
+      - master
+      - dev
   pull_request:
     branches-ignore:
       - "depfu/**"
