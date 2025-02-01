@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const fetch = require("node-fetch");
 const { capitalizar } = require("../../modulos/utils");
 const cidades = require("../../recursos/cidades.json");
@@ -77,7 +77,7 @@ module.exports = {
 
     client.log("info", `Clima de "${clima.name}, ${clima.sys.country}" recebido`);
 
-    const Embed = new MessageEmbed()
+    const Embed = new EmbedBuilder()
       .setColor(client.defs.corEmbed.normal)
       .setAuthor({ name: "Previsão do tempo" })
       .setTitle(`:flag_${clima.sys.country.toLowerCase()}: ${clima.name}`)
@@ -152,7 +152,7 @@ module.exports = {
 
     client.log("info", `Clima de "${clima.name}, ${clima.sys.country}" recebido`);
 
-    const Embed = new MessageEmbed()
+    const Embed = new EmbedBuilder()
       .setColor(client.defs.corEmbed.normal)
       .setAuthor({ name: "Previsão do tempo" })
       .setTitle(`${clima.name}, ${clima.sys.country}`)

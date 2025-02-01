@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const { traduzirPerms } = require("../../modulos/utils");
 
 // Emitido quando um comando é bloqueado de ser executado
@@ -33,7 +33,7 @@ module.exports = {
           );
           if (!data.motivo) return;
 
-          const desativadoEmbed = new MessageEmbed()
+          const desativadoEmbed = new EmbedBuilder()
             .setColor(client.defs.corEmbed.nao)
             .setTitle("🚫 Comando desativado")
             .setDescription(`${data.motivo}`);
@@ -45,7 +45,7 @@ module.exports = {
             "comando",
             `${cmd.nome} foi bloqueado de ser executado por falta de permissão do usuário`
           );
-          const userPemrsEmbed = new MessageEmbed()
+          const userPemrsEmbed = new EmbedBuilder()
             .setColor(client.defs.corEmbed.nao)
             .setTitle("📛 Permissão necessária")
             .setDescription(
@@ -61,7 +61,7 @@ module.exports = {
             `${cmd.nome} foi bloqueado de ser executado por falta de permissão do bot`,
             "erro"
           );
-          const clientPemrsEmbed = new MessageEmbed()
+          const clientPemrsEmbed = new EmbedBuilder()
             .setColor(client.defs.corEmbed.nao)
             .setTitle("📛 Permissão necessária")
             .setDescription(
@@ -76,7 +76,7 @@ module.exports = {
             "comando",
             `${cmd.nome} foi bloqueado de ser executado por ser um comando de apenas server`
           );
-          const guildEmbed = new MessageEmbed()
+          const guildEmbed = new EmbedBuilder()
             .setColor(client.defs.corEmbed.nao)
             .setTitle("🚫 Aqui não")
             .setDescription("você precisa está em um `servidor` para fazer isso");
@@ -88,7 +88,7 @@ module.exports = {
             "comando",
             `${cmd.nome} foi bloqueado de ser executado por ser um comando NSFW fora do canal`
           );
-          const nsfwEmbed = new MessageEmbed()
+          const nsfwEmbed = new EmbedBuilder()
             .setColor(client.defs.corEmbed.nao)
             .setTitle("🚫 Aqui não")
             .setDescription("você precisa está em um canal `NSFW` para fazer isso");
@@ -97,7 +97,7 @@ module.exports = {
 
         case "canalVoz": {
           client.log("comando", `${cmd.nome} foi bloqueado de ser executado por ser um comando de voz`);
-          const vozEmbed = new MessageEmbed()
+          const vozEmbed = new EmbedBuilder()
             .setColor(client.defs.corEmbed.nao)
             .setTitle("🚫 Não consigo")
             .setDescription("você precisa está em um canal de `voz` para fazer isso");
@@ -111,7 +111,7 @@ module.exports = {
 
         default: {
           client.log("comando", `${cmd.nome} foi bloqueado de ser executado`);
-          const Embed = new MessageEmbed()
+          const Embed = new EmbedBuilder()
             .setColor(client.defs.corEmbed.nao)
             .setTitle("❌ Ops")
             .setDescription("eu não posso executar esse comando");

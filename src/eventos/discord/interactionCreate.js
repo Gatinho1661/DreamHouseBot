@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { MessageEmbed, Interaction } = require("discord.js");
+const { EmbedBuilder, Interaction } = require("discord.js");
 const { formatarCanal } = require("../../modulos/utils");
 const { interacoes } = require("../../modulos/nfs");
 
@@ -59,7 +59,7 @@ module.exports = {
         // Se o comando tiver sendo executado em uma DM não precisa verificar isso
         if (!/DM|GROUP_DM|UNKNOWN/.test(iCmd.channel.type)) {
           if (comando.permissoes.bot) {
-            const faltando = iCmd.channel.guild.me.permissions.missing(comando.permissoes.bot);
+            const faltando = iCmd.channel.guild.members.me.permissions.missing(comando.permissoes.bot);
             if (faltando.length > 0) {
               const data = { faltando };
               return client.emit("comandoBloqueado", iCmd, "permBot", data);
@@ -180,7 +180,7 @@ module.exports = {
             "erro"
           );
 
-          const Embed = new MessageEmbed()
+          const Embed = new EmbedBuilder()
             .setColor(client.defs.corEmbed.erro)
             .setTitle("❗ Ocorreu um erro ao executar esse comando")
             .setDescription(`Fale com o ${client.application.owner.toString()} para arrumar isso.`);
@@ -193,7 +193,7 @@ module.exports = {
       }
 
       //* Comandos de menu contextual 
-      if (interacao.isMessageContextMenu() || interacao.isUserContextMenu()) {
+      if (interacao.isMessageContextMenuCommand() || interacao.isUserContextMenuCommand()) {
         const iCmd = interacao;
 
         const excTempo = new Date();
@@ -232,7 +232,7 @@ module.exports = {
             "erro"
           );
 
-          const Embed = new MessageEmbed()
+          const Embed = new EmbedBuilder()
             .setColor(client.defs.corEmbed.erro)
             .setTitle("❗ Ocorreu um erro ao executar esse comando")
             .setDescription(`Fale com o ${client.application.owner.toString()} para arrumar isso.`);

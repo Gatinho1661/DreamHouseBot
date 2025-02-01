@@ -4,34 +4,29 @@
   "description": "Bot oficial da DreamHouse",
   "main": "src/bot.js",
   "scripts": {
-    "start": "title DreamHouse && node src/bot.js",
+    "start": "node src/bot.js",
     "test": "node testar.js"
   },
   "repository": "github:Gatinho1661/DreamHouseBot",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=22.13.1"
   },
   "author": "Gatinho1661",
   "license": "MIT",
   "dependencies": {
-    "@dice-roller/rpg-dice-roller": "^5.1.0",
-    "@distube/soundcloud": "^1.1.0",
-    "@distube/spotify": "^1.2.1",
-    "@distube/yt-dlp": "^1.0.2",
-    "canvas": "^2.9.1",
+    "@dice-roller/rpg-dice-roller": "^5.5.0",
     "chalk": "^4.1.2",
-    "chrono-node": "^2.3.8",
-    "discord.js": "^13.6.0",
-    "distube": "^3.3.4",
-    "dotenv": "^16.0.0",
+    "chrono-node": "^2.7.8",
+    "discord.js": "^14.17.3",
+    "dotenv": "^16.4.7",
     "duration": "^0.2.2",
-    "enmap": "^5.9.0",
-    "fast-glob": "^3.2.11",
+    "enmap": "^6.0.3",
+    "fast-glob": "^3.3.3",
     "long-timeout": "^0.1.1",
-    "node-cron": "^3.0.0",
-    "sodium": "^3.0.2"
+    "node-cron": "^3.0.3",
+    "node-fetch": "^2.7.0"
   },
   "devDependencies": {
-    "eslint": "^8.14.0"
+    "eslint": "^9.19.0"
   }
 }

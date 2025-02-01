@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-const { MessageButton, MessageEmbed, CommandInteraction, Message } = require("discord.js");
+const { EmbedBuilder, ButtonBuilder, ButtonStyle, CommandInteraction, Message } = require("discord.js");
 const { formatarCanal } = require("../modulos/utils");
 
 /**
@@ -21,7 +21,7 @@ exports.coletorICCmd = (iCmd, resposta, respostas, filtro) => {
 
   coletor.on("collect", async iCMsg => {
     if (filtro(iCMsg)) {
-      const cuidaEmbed = new MessageEmbed()
+      const cuidaEmbed = new EmbedBuilder()
         .setColor(client.defs.corEmbed.nao)
         .setTitle("⛔ Cuida da sua vida")
         .setDescription("Essa mensagem não foi direcionada a você");
@@ -55,12 +55,12 @@ exports.coletorICCmd = (iCmd, resposta, respostas, filtro) => {
     if (razao === "finalizado") {
       for (const actionRows of resposta.components) {
         for (const componente of actionRows.components) {
-          if (componente.style === "LINK") continue; // se for um botao de link ignore
+          if (componente.style === ButtonStyle.Link) continue; // se for um botao de link ignore
 
           componente.setDisabled(true); // desativa o componente
 
           //trocar o estilo de todos menos o botao selecionado
-          if (componente.customId !== selecionado) componente.setStyle?.("SECONDARY");
+          if (componente.customId !== selecionado) componente.setStyle?.(ButtonStyle.Secondary);
 
           //mostra os intens selecionados
           if (componente.type === "SELECT_MENU" && selecionadoTipo === "SELECT_MENU") {
@@ -76,27 +76,27 @@ exports.coletorICCmd = (iCmd, resposta, respostas, filtro) => {
       return;
     }
 
-    const botaoFinalizado = new MessageButton();
+    const botaoFinalizado = new ButtonBuilder();
     if (razao === "erro") {
       botaoFinalizado
         .setCustomId("erro")
         .setLabel("Ocorreu um erro")
         .setDisabled(true)
-        .setStyle("DANGER");
+        .setStyle(ButtonStyle.Danger);
     }
     if (razao === "time") {
       botaoFinalizado
         .setCustomId("tempo")
         .setLabel("Tempo esgotado")
         .setDisabled(true)
-        .setStyle("SECONDARY");
+        .setStyle(ButtonStyle.Secondary);
     }
     if (razao === "idle") {
       botaoFinalizado
         .setCustomId("tempo")
         .setLabel("Inatividade")
         .setDisabled(true)
-        .setStyle("SECONDARY");
+        .setStyle(ButtonStyle.Secondary);
     }
 
     iCmd.editReply({ components: [{ type: "ACTION_ROW", components: [botaoFinalizado] }] }).catch();
@@ -123,7 +123,7 @@ exports.coletorICMsg = (msg, comando, resposta, respostas, filtro) => {
 
   coletor.on("collect", async iCMsg => {
     if (filtro(iCMsg)) {
-      const cuidaEmbed = new MessageEmbed()
+      const cuidaEmbed = new EmbedBuilder()
         .setColor(client.defs.corEmbed.nao)
         .setTitle("⛔ Cuida da sua vida")
         .setDescription("Essa mensagem não foi direcionada a você");
@@ -157,14 +157,14 @@ exports.coletorICMsg = (msg, comando, resposta, respostas, filtro) => {
     if (razao === "finalizado") {
       for (const actionRows of resposta.components) {
         for (const componente of actionRows.components) {
-          if (componente.style === "LINK") continue; // se for um botao de link ignore
+          if (componente.style === ButtonStyle.Link) continue; // se for um botao de link ignore
 
           componente.setDisabled(true); // desativa o componente
 
-          //trocar o estilo de todos menos o botao selecionado
-          if (componente.customId !== selecionado) componente.setStyle?.("SECONDARY");
+          //trocar o estilo de todos menos o botão selecionado
+          if (componente.customId !== selecionado) componente.setStyle?.(ButtonStyle.Secondary);
 
-          //mostra os intens selecionados
+          //mostra os itens selecionados
           if (componente.type === "SELECT_MENU" && selecionadoTipo === "SELECT_MENU") {
             for (const opcao of componente.options) {
               if (selecionado.includes(opcao.value)) opcao.default = true;
@@ -177,27 +177,27 @@ exports.coletorICMsg = (msg, comando, resposta, respostas, filtro) => {
       return;
     }
 
-    const botaoFinalizado = new MessageButton();
+    const botaoFinalizado = new ButtonBuilder();
     if (razao === "erro") {
       botaoFinalizado
         .setCustomId("erro")
         .setLabel("Ocorreu um erro")
         .setDisabled(true)
-        .setStyle("DANGER");
+        .setStyle(ButtonStyle.Danger);
     }
     if (razao === "time") {
       botaoFinalizado
         .setCustomId("tempo")
         .setLabel("Tempo esgotado")
         .setDisabled(true)
-        .setStyle("SECONDARY");
+        .setStyle(ButtonStyle.Secondary);
     }
     if (razao === "idle") {
       botaoFinalizado
         .setCustomId("tempo")
         .setLabel("Inatividade")
         .setDisabled(true)
-        .setStyle("SECONDARY");
+        .setStyle(ButtonStyle.Secondary);
     }
 
     resposta.edit({ components: [{ type: "ACTION_ROW", components: [botaoFinalizado] }] }).catch();

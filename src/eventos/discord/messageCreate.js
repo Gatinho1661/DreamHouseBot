@@ -63,7 +63,7 @@ module.exports = {
 
     //* Executar apenas se for o dono do bot
     if (client.application.owner.id !== msg.author.id) {
-      //TEMP Mensagem para avisar que apenas aceitarar comandos barra
+      //TEMP Mensagem para avisar que apenas aceitara comandos barra
       const Embed = new MessageEmbed()
         .setColor(client.defs.corEmbed.nao)
         .setTitle("❌ Comandos por texto removidos")

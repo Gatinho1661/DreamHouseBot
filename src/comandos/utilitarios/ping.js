@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   //* Infomações do comando
@@ -24,7 +24,7 @@ module.exports = {
 
   //* Comando
   async executar(iCmd) {
-    const pingando = new MessageEmbed()
+    const pingando = new EmbedBuilder()
       .setColor(client.defs.corEmbed.carregando)
       .setTitle("🏓 Ping")
       .setDescription("calculando ping...");
@@ -36,7 +36,7 @@ module.exports = {
     client.log("verbose", `Latência: ${ping}ms`);
     client.log("verbose", `API: ${api}ms`);
 
-    const resposta = new MessageEmbed()
+    const resposta = new EmbedBuilder()
       .setColor(client.defs.corEmbed.normal)
       .setTitle("🏓 Pong")
       .addFields(
@@ -48,7 +48,7 @@ module.exports = {
 
   //* Comando como mensagem
   async executarMsg(msg) {
-    const pingando = new MessageEmbed()
+    const pingando = new EmbedBuilder()
       .setColor(client.defs.corEmbed.carregando)
       .setTitle("🏓 Ping")
       .setDescription("calculando ping...");
@@ -64,7 +64,7 @@ module.exports = {
     client.log("verbose", `Latência: ${ping}ms`);
     client.log("verbose", `API: ${api}ms`);
 
-    const resposta = new MessageEmbed()
+    const resposta = new EmbedBuilder()
       .setColor(client.defs.corEmbed.normal)
       .setTitle("🏓 Pong")
       .addFields(

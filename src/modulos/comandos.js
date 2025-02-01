@@ -46,7 +46,7 @@ module.exports.carregar = () => {
       listaComandos.push(comando); // serve so para dar log
       client.log("verbose", `Comando foi registrado: ${comando.nome} `);
     } catch (err) {
-      client.log("critico", `${err.message}, o comando "${pasta}/${arquivo}" será ignorado`);
+      client.log("critico", `O comando "${pasta}/${arquivo}" será ignorado\n${err.stack}`);
     }
   }
 

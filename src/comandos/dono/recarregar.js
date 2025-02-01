@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const fg = require("fast-glob");
 
 module.exports = {
@@ -26,7 +26,7 @@ module.exports = {
   async executarMsg(msg, args) {
 
     if (!args[0]) {
-      const semArgs = new MessageEmbed()
+      const semArgs = new EmbedBuilder()
         .setColor(client.defs.corEmbed.nao)
         .setTitle("⛔ Faltando argumentos")
         .setDescription("Qual comando você quer recarregar?");
@@ -86,7 +86,7 @@ module.exports = {
 
           client.log("bot", `Comando ${comandoNovo.nome} atualizado globalmente`);
 
-          const Embed = new MessageEmbed()
+          const Embed = new EmbedBuilder()
             .setColor(client.defs.corEmbed.sim)
             .setTitle("✅ Comando recarregado e atualizado globalmente")
             .setDescription(`\`${comando.nome}\` foi atualizado globalmente`);
@@ -122,7 +122,7 @@ module.exports = {
 
           client.log("bot", `Comando ${comandoNovo.nome} atualizado no servidor de testes`);
 
-          const Embed = new MessageEmbed()
+          const Embed = new EmbedBuilder()
             .setColor(client.defs.corEmbed.sim)
             .setTitle("✅ Comando recarregado e atualizado")
             .setDescription(`\`${comando.nome}\` foi atualizado no servidor de testes`);
@@ -135,7 +135,7 @@ module.exports = {
           break;
         }
         default: {
-          const Embed = new MessageEmbed()
+          const Embed = new EmbedBuilder()
             .setColor(client.defs.corEmbed.sim)
             .setTitle("✅ Comando recarregado")
             .setDescription(`\`${comando.nome}\` foi recarregado`);
@@ -151,7 +151,7 @@ module.exports = {
       }
 
     } else {
-      const falhaEmbed = new MessageEmbed()
+      const falhaEmbed = new EmbedBuilder()
         .setColor(client.defs.corEmbed.nao)
         .setTitle("❌ Comando não encontrado")
         .setDescription(`${args[0]} não foi encontrado`);

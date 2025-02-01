@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageButton } = require("discord.js");
+const { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require("discord.js");
 const { coletorICMsg } = require("../../utilidades/coletores");
 const { registrar } = require("../../modulos/comandos");
 
@@ -27,7 +27,7 @@ module.exports = {
   async executarMsg(msg, args) {
 
     if (!args[0]) {
-      const Embed = new MessageEmbed()
+      const Embed = new EmbedBuilder()
         .setColor(client.defs.corEmbed.nao)
         .setTitle("⛔ Faltando argumentos")
         .setDescription("Você quer atualizar ou remover os comandos?");
@@ -40,29 +40,29 @@ module.exports = {
     }
 
     if (args[0] === "remover") {
-      const todos = new MessageButton()
+      const todos = new ButtonBuilder()
         .setCustomId("todos")
         .setLabel("Todos")
         .setDisabled(false)
-        .setStyle("DANGER");
-      const globalmente = new MessageButton()
+        .setStyle(ButtonStyle.Danger);
+      const globalmente = new ButtonBuilder()
         .setCustomId("globalmente")
         .setLabel("Globalmente")
         .setDisabled(false)
-        .setStyle("DANGER");
-      const servidor = new MessageButton()
+        .setStyle(ButtonStyle.Danger);
+      const servidor = new ButtonBuilder()
         .setCustomId("servidor")
         .setLabel("Servidor")
         .setDisabled(false)
-        .setStyle("DANGER");
-      const cancelar = new MessageButton()
+        .setStyle(ButtonStyle.Danger);
+      const cancelar = new ButtonBuilder()
         .setCustomId("cancelar")
         .setLabel("Cancelar")
         .setDisabled(false)
-        .setStyle("PRIMARY");
+        .setStyle(ButtonStyle.Primary);
       let botoes = [todos, globalmente, servidor, cancelar];
 
-      const Embed = new MessageEmbed()
+      const Embed = new EmbedBuilder()
         .setColor(client.defs.corEmbed.carregando)
         .setTitle("🗑️ Remover comandos")
         .setDescription("Você deseja remover todos os comandos de onde?")
@@ -73,7 +73,7 @@ module.exports = {
       const resposta = await msg.channel.send({
         content: null,
         embeds: [Embed],
-        components: [{ type: "ACTION_ROW", components: botoes }],
+        components: [new ActionRowBuilder().addComponents(botoes)],
         reply: { messageReference: msg }
       }).catch();
 
@@ -144,7 +144,7 @@ module.exports = {
 
       client.log("bot", "Todos os comandos / foram atualizados globalmente e do servidor de testes");
 
-      const Embed = new MessageEmbed()
+      const Embed = new EmbedBuilder()
         .setColor(client.defs.corEmbed.sim)
         .setTitle("✅ Comandos atualizados")
         .setDescription("Todos os comandos / foram atualizados globalmente e do servidor de testes");
@@ -155,7 +155,7 @@ module.exports = {
       }).catch();
 
     } else {
-      const Embed = new MessageEmbed()
+      const Embed = new EmbedBuilder()
         .setColor(client.defs.corEmbed.nao)
         .setTitle("⛔ Argumentos errados")
         .setDescription("Você quer atualizar ou remover os comandos?");
