@@ -32,6 +32,6 @@
     "sodium": "^3.0.2"
   },
   "devDependencies": {
-    "eslint": "^8.14.0"
+    "eslint": "^9.26.0"
   }
 }
